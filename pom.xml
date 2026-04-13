@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>parent</module>
         <module>app</module>
     </modules>
 

@@ -4,10 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--
+        Mirrors ace-application: parent is ace-parent analog, NOT the root.
+        This means prepare-agent in the root is NOT inherited here.
+    -->
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>jacoco-argline-test</artifactId>
+        <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
     </parent>
 
     <artifactId>app</artifactId>
@@ -25,16 +30,15 @@
     <build>
         <plugins>
             <!--
-                FIXED: @{argLine} late-binds JaCoCo's agent before the custom flag,
-                so the agent attaches and coverage is recorded.
-                Customer equivalent: @{argLine} -javaagent:aspectjweaver.jar
+                BROKEN: hardcoded argLine overrides JaCoCo's agent.
+                Mirrors ace-application's -javaagent:aspectjweaver.jar override.
             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <argLine>@{argLine} -Dmy.custom.agent=true</argLine>
+                    <argLine>-Dmy.custom.agent=true</argLine>
                 </configuration>
             </plugin>
 
