@@ -25,18 +25,16 @@
     <build>
         <plugins>
             <!--
-                BROKEN: mirrors ace-application/pom.xml Surefire config.
-                Hardcoded argLine overwrites JaCoCo's ${argLine} entirely,
-                so the JaCoCo agent never attaches during tests.
-                (Customer uses -javaagent:aspectjweaver.jar here; we simulate
-                with a harmless flag to avoid needing the jar.)
+                FIXED: @{argLine} late-binds JaCoCo's agent before the custom flag,
+                so the agent attaches and coverage is recorded.
+                Customer equivalent: @{argLine} -javaagent:aspectjweaver.jar
             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <argLine>-Dmy.custom.agent=true</argLine>
+                    <argLine>@{argLine} -Dmy.custom.agent=true</argLine>
                 </configuration>
             </plugin>
 
