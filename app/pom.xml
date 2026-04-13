@@ -30,15 +30,15 @@
     <build>
         <plugins>
             <!--
-                BROKEN: hardcoded argLine overrides JaCoCo's agent.
-                Mirrors ace-application's -javaagent:aspectjweaver.jar override.
+                FIX 2: @{argLine} preserves JaCoCo's agent alongside custom flags.
+                Customer equivalent: @{argLine} -javaagent:aspectjweaver.jar
             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <argLine>-Dmy.custom.agent=true</argLine>
+                    <argLine>@{argLine} -Dmy.custom.agent=true</argLine>
                 </configuration>
             </plugin>
 
