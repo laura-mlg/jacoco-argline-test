@@ -25,3 +25,5 @@ jobs:
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: target/site/jacoco/jacoco.xml
+        env:
+          JACOCO_SOURCE_PATH: src/main/java
