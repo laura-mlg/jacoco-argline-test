@@ -16,11 +16,6 @@
         <jacoco.version>0.8.12</jacoco.version>
     </properties>
 
-    <!--
-        Mirrors ace-parent: declares Surefire version in pluginManagement
-        with NO argLine and NO prepare-agent.
-        Application modules inherit from here, not from the root.
-    -->
     <build>
         <pluginManagement>
             <plugins>
@@ -31,5 +26,24 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <!--
+                FIX 1: prepare-agent moved here so all child modules inherit it.
+                This is what was missing — root had it but app inherits from parent.
+            -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
