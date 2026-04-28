@@ -27,23 +27,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <!--
-                FIX 1: prepare-agent moved here so all child modules inherit it.
-                This is what was missing — root had it but app inherits from parent.
-            -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
