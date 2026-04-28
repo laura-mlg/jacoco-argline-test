@@ -38,7 +38,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <argLine>@{argLine} -Dmy.custom.agent=true</argLine>
+                    <argLine>-Dmy.custom.agent=true</argLine>
                 </configuration>
             </plugin>
 
